@@ -8,11 +8,11 @@
             <p id="date"></p>
             <p id="time" class="bold"></p>
         </div>
-
+        <h1>Hello</h1>
         <div class="login-box-body">
             <h4 class="login-box-msg">Employee Attendance mark your Attendance Here</h4>
 
-            <form id="attendance">
+            <form id="attendanc">
                 <div class="form-group">
                     <select class="form-control" name="status">
                         <option value="in">(Welcome To office)Time In</option>
@@ -53,13 +53,12 @@
             $('#time').html(momentNow.format('hh:mm:ss A'));
         }, 100);
 
-        $('#attendance').submit(function(e) {
+        $('#attendanc').submit(function(e) {
             e.preventDefault();
             var attendance = $(this).serialize();
             $.ajax({
                 type: 'POST',
-                url: $_SERVER['DOCUMENT_ROOT'].
-                'attendance.php',
+                url: 'attendance.php',
                 data: attendance,
                 dataType: 'json',
                 success: function(response) {
