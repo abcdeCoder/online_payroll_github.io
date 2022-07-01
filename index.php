@@ -62,17 +62,18 @@
                 data: attendance,
                 dataType: 'json',
                 success: function(response) {
-                    console.log(response);
                     if (response.error) {
-
                         $('.alert').hide();
                         $('.alert-danger').show();
                         $('.message').html(response.message);
+                        console.log("1");
                     } else {
                         $('.alert').hide();
                         $('.alert-success').show();
                         $('.message').html(response.message);
                         $('#employee').val('');
+                        console.log("2");
+
                     }
                 }
             });
