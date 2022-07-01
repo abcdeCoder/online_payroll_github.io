@@ -90,8 +90,7 @@ $range_from = date('m/d/Y', strtotime('-30 day', strtotime($range_to)));
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $sql =
-                                            'SELECT *, SUM(amount) as total_amount FROM deductions';
+                                        $sql = 'SELECT * FROM deductions';
                                         $query = $conn->query($sql);
                                         $drow = $query->fetch_assoc();
                                         $deduction = $drow['total_amount'];
@@ -103,8 +102,14 @@ $range_from = date('m/d/Y', strtotime('-30 day', strtotime($range_to)));
                                         if (isset($_GET['range'])) {
                                             $range = $_GET['range'];
                                             $ex = explode(' - ', $range);
-                                            $from = date('Y-m-d');
-                                            $to = date('Y-m-d');
+                                            $from = date(
+                                                'Y-m-d',
+                                                strtotime($ex[0])
+                                            );
+                                            $to = date(
+                                                'Y-m-d',
+                                                strtotime($ex[1])
+                                            );
                                         }
                                         $sql = 'SELECT * FROM attendance';
                                         $query = $conn->query($sql);
@@ -112,7 +117,7 @@ $range_from = date('m/d/Y', strtotime('-30 day', strtotime($range_to)));
                                         while ($row = $query->fetch_assoc()) {
                                             $empid = $row['empid'];
                                             $casql =
-                                                'SELECT * FROM cashadvance ';
+                                                'SELECT * FROM cashadvance';
                                             $caquery = $conn->query($casql);
                                             $carow = $caquery->fetch_assoc();
                                             $cashadvance = $carow['cashamount'];
