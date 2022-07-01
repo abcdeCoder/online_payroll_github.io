@@ -90,7 +90,8 @@ $range_from = date('m/d/Y', strtotime('-30 day', strtotime($range_to)));
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $sql = 'SELECT * FROM deductions';
+                                        $sql =
+                                            'SELECT  SUM(amount) as total_amount FROM deductions';
                                         $query = $conn->query($sql);
                                         $drow = $query->fetch_assoc();
                                         $deduction = $drow['total_amount'];
@@ -111,12 +112,12 @@ $range_from = date('m/d/Y', strtotime('-30 day', strtotime($range_to)));
                                                 strtotime($ex[1])
                                             );
                                         }
-                                        $sql = "SELECT *, SUM(num_hr) AS total_hr, attendance.employee_id AS empid FROM attendance LEFT JOIN employees ON employees.id=attendance.employee_id LEFT JOIN position ON position.id=employees.position_id WHERE date BETWEEN '$from' AND '$to' GROUP BY attendance.employee_id ORDER BY employees.lastname ASC, employees.firstname ASC";
+                                        $sql = "SELECT SUM(num_hr) AS total_hr, attendance.employee_id AS empid FROM attendance LEFT JOIN employees ON employees.id=attendance.employee_id LEFT JOIN position ON position.id=employees.position_id WHERE date BETWEEN '$from' AND '$to' GROUP BY attendance.employee_id ORDER BY employees.lastname ASC, employees.firstname ASC";
                                         $query = $conn->query($sql);
                                         $total = 0;
                                         while ($row = $query->fetch_assoc()) {
                                             $empid = $row['empid'];
-                                            $casql = "SELECT *, SUM(amount) AS cashamount FROM cashadvance WHERE employee_id='$empid' AND date_advance BETWEEN '$from' AND '$to'";
+                                            $casql = "SELECT SUM(amount) AS cashamount FROM cashadvance WHERE employee_id='$empid' AND date_advance BETWEEN '$from' AND '$to'";
                                             $caquery = $conn->query($casql);
                                             $carow = $caquery->fetch_assoc();
                                             $cashadvance = $carow['cashamount'];
