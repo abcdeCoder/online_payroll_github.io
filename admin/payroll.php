@@ -134,7 +134,7 @@ $range_from = date('m/d/Y', strtotime('-30 day', strtotime($range_to)));
                                                 $row['firstname'] .
                                                 "</td>
                           <td>" .
-                                                $row['empid'] .
+                                                $row['employee_id'] .
                                                 "</td>
                           <td>" .
                                                 number_format($gross, 2) .
