@@ -12,7 +12,7 @@
         <div class="login-box-body">
             <h4 class="login-box-msg">Employee Attendance mark your Attendance Here</h4>
 
-            <form id="attendanc">
+            <form id="attendance">
                 <div class="form-group">
                     <select class="form-control" name="status">
                         <option value="in">(Welcome To office)Time In</option>
@@ -53,7 +53,7 @@
             $('#time').html(momentNow.format('hh:mm:ss A'));
         }, 100);
 
-        $('#attendanc').submit(function(e) {
+        $('#attendance').submit(function(e) {
             e.preventDefault();
             var attendance = $(this).serialize();
             $.ajax({
@@ -62,7 +62,10 @@
                 data: attendance,
                 dataType: 'json',
                 success: function(response) {
+                    console.log(response.error);
+                    console.log(response);
                     if (response.error) {
+
                         $('.alert').hide();
                         $('.alert-danger').show();
                         $('.message').html(response.message);
