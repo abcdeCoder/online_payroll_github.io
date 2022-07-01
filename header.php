@@ -38,5 +38,13 @@
     .bold {
         font-weight: bold;
     }
+
+    .Stylee {
+        background-color: black;
+        color: white;
+        position: absolute;
+        left: 10%;
+        top: 110%;
+    }
     </style>
 </head>

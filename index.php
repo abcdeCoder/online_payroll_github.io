@@ -1,14 +1,6 @@
 <?php session_start(); ?>
 <?php include 'header.php'; ?>
-<Style>
-.Stylee {
-    background-color: black;
-    color: white;
-    position: absolute;
-    left: 10%;
-    top: 110%;
-}
-</Style>
+
 
 <body class="hold-transition login-page">
     <div class="login-box">
@@ -51,7 +43,7 @@
 
     </div>
 
-    <?php include 'scripts.php' ?>
+    <?php include 'scripts.php'; ?>
     <script type="text/javascript">
     $(function() {
         var interval = setInterval(function() {
