@@ -62,7 +62,6 @@
                 data: attendance,
                 dataType: 'json',
                 success: function(response) {
-                    console.log(response.error);
                     console.log(response);
                     if (response.error) {
 
