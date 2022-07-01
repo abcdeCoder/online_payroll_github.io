@@ -8,6 +8,7 @@
             <p id="date"></p>
             <p id="time" class="bold"></p>
         </div>
+
         <div class="login-box-body">
             <h4 class="login-box-msg">Employee Attendance mark your Attendance Here</h4>
 
