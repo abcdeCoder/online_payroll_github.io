@@ -116,8 +116,7 @@ $range_from = date('m/d/Y', strtotime('-30 day', strtotime($range_to)));
                                         $total = 0;
                                         while ($row = $query->fetch_assoc()) {
                                             $empid = $row['empid'];
-                                            $casql =
-                                                'SELECT * FROM cashadvance';
+                                            $casql = "SELECT * FROM cashadvance WHERE employee_id='$empid' AND date_advance BETWEEN '$from' AND '$to'";
                                             $caquery = $conn->query($casql);
                                             $carow = $caquery->fetch_assoc();
                                             $cashadvance = $carow['cashamount'];
