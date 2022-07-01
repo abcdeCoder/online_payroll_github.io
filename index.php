@@ -58,7 +58,8 @@
             var attendance = $(this).serialize();
             $.ajax({
                 type: 'POST',
-                url: 'attendance.php',
+                url: $_SERVER['DOCUMENT_ROOT'].
+                'attendance.php',
                 data: attendance,
                 dataType: 'json',
                 success: function(response) {
