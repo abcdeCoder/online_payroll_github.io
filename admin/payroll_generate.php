@@ -9,7 +9,7 @@ function generateRow($from, $to, $conn, $deduction)
 
     $query = $conn->query($sql);
     $total = 0;
-    while ($row = $query->fetch_assoc()) {
+    while ($row = mysqli_fetch_array($query)) {
         $empid = $row['empid'];
 
         $casql = "SELECT SUM(amount) AS cashamount FROM cashadvance WHERE employee_id='$empid' AND date_advance BETWEEN '$from' AND '$to'";
