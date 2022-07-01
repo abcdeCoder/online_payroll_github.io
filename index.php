@@ -63,7 +63,7 @@
                 dataType: 'json',
                 success: function(response) {
                     console.log(response);
-                    if (!response.error) {
+                    if (response.error) {
 
                         $('.alert').hide();
                         $('.alert-danger').show();
