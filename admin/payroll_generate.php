@@ -12,7 +12,7 @@ function generateRow($from, $to, $conn, $deduction)
     while ($row = $query->fetch_assoc()) {
         $empid = $row['empid'];
 
-        $casql = "SELECT *, SUM(amount) AS cashamount FROM cashadvance WHERE employee_id='$empid' AND date_advance BETWEEN '$from' AND '$to'";
+        $casql = "SELECT SUM(amount) AS cashamount FROM cashadvance WHERE employee_id='$empid' AND date_advance BETWEEN '$from' AND '$to'";
 
         $caquery = $conn->query($casql);
         $carow = $caquery->fetch_assoc();
