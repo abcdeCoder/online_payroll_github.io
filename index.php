@@ -59,7 +59,9 @@
             $.ajax({
                 type: 'POST',
                 url: 'attendance.php',
-                data: attendance,
+                data: {
+                    attendance
+                },
                 dataType: 'json',
                 success: function(response) {
                     console.log(response);
