@@ -33,7 +33,7 @@ if (isset($_POST['employee'])) {
                 $logstatus = $lognow > $srow['time_in'] ? 0 : 1;
                 //
                 $tim = mt_rand(0, 1000);
-                $sql = "INSERT INTO attendance (employee_id, date, time_in, status,time_out,num_hr) VALUES ('$id', '$date_now', NOW(), '$logstatus','00:00:00',$tim)";
+                $sql = "INSERT INTO attendance (employee_id, date, time_in, status) VALUES ('$id', '$date_now', NOW(), '$logstatus')";
                 if ($conn->query($sql)) {
                     $output['message'] =
                         'Time in: ' .
