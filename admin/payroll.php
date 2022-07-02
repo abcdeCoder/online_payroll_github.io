@@ -112,7 +112,7 @@ $range_from = date('m/d/Y', strtotime('-30 day', strtotime($range_to)));
                                         $sql = "SELECT SUM(num_hr) AS total_hr, attendance.employee_id AS empid FROM attendance LEFT JOIN employees ON employees.id=attendance.employee_id LEFT JOIN position ON position.id=employees.position_id WHERE date BETWEEN '$from' AND '$to' GROUP BY attendance.employee_id ORDER BY employees.lastname ASC, employees.lastname ASC";
                                         $query = $conn->query($sql);
                                         $total = 0;
-                                        foreach ($query as $row) {
+                                        while ($row = $query->fetch_assoc()) {
                                             $empid = $row['empid'];
                                             $casql = "SELECT SUM(amount) AS cashamount FROM cashadvance WHERE employee_id='$empid' AND date_advance BETWEEN '$from' AND '$to'";
                                             $caquery = $conn->query($casql);
