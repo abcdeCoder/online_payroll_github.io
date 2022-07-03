@@ -38,7 +38,7 @@ function generateRow($from, $to, $conn, $deduction)
             $row['empid'] .
             '</td>
 				<td align="right">' .
-            number_format($rrow['rate'] * $row['total_hr'], 2) .
+            number_format($net, 2) .
             '</td>
 			</tr>
 			';
