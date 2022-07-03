@@ -92,7 +92,7 @@ $range_from = date('m/d/Y', strtotime('-30 day', strtotime($range_to)));
                                         <?php
                                         $dsql =
                                             'SELECT  SUM(amount) as total_amount FROM deductions';
-                                        $dquery = $conn->query($dsql);
+                                        $dquery = $dconn->query($sql);
                                         $drow = $dquery->fetch_assoc();
                                         $deduction = $drow['total_amount'];
                                         $to = date('Y-m-d');
@@ -103,8 +103,15 @@ $range_from = date('m/d/Y', strtotime('-30 day', strtotime($range_to)));
                                         if (isset($_GET['range'])) {
                                             $range = $_GET['range'];
                                             $ex = explode(' - ', $range);
-                                            $from = date('Y-m-d', strtotime($ex[0]));
-                                             $to = date('Y-m-d', strtotime($ex[1]));
+                                            $from = date(
+                                                'Y-m-d',
+                                                strtotime($ex[0])
+                                            );
+                                            $to = date(
+                                                'Y-m-d',
+                                                strtotime($ex[1])
+                                            );
+                                        }
                                         $sql = "SELECT SUM(num_hr) AS total_hr, attendance.employee_id AS empid FROM attendance LEFT JOIN employees ON employees.id=attendance.employee_id LEFT JOIN position ON position.id=employees.position_id WHERE date BETWEEN '$from' AND '$to' GROUP BY attendance.employee_id ORDER BY employees.lastname ASC, employees.lastname ASC";
                                         $query = $conn->query($sql);
                                         $total = 0;
