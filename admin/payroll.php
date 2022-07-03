@@ -90,10 +90,10 @@ $range_from = date('m/d/Y', strtotime('-30 day', strtotime($range_to)));
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $sql =
+                                        $dsql =
                                             'SELECT  SUM(amount) as total_amount FROM deductions';
-                                        $query = $conn->query($sql);
-                                        $drow = $query->fetch_assoc();
+                                        $dquery = $conn->query($dsql);
+                                        $drow = $dquery->fetch_assoc();
                                         $deduction = $drow['total_amount'];
                                         $to = date('Y-m-d');
                                         $from = date(
@@ -103,12 +103,8 @@ $range_from = date('m/d/Y', strtotime('-30 day', strtotime($range_to)));
                                         if (isset($_GET['range'])) {
                                             $range = $_GET['range'];
                                             $ex = explode(' - ', $range);
-                                            $to = date('Y-m-d');
-                                        }
-                                        $from = date(
-                                            'Y-m-d',
-                                            strtotime('-30 day', strtotime($to))
-                                        );
+                                            $from = date('Y-m-d', strtotime($ex[0]));
+                                             $to = date('Y-m-d', strtotime($ex[1]));
                                         $sql = "SELECT SUM(num_hr) AS total_hr, attendance.employee_id AS empid FROM attendance LEFT JOIN employees ON employees.id=attendance.employee_id LEFT JOIN position ON position.id=employees.position_id WHERE date BETWEEN '$from' AND '$to' GROUP BY attendance.employee_id ORDER BY employees.lastname ASC, employees.lastname ASC";
                                         $query = $conn->query($sql);
                                         $total = 0;
@@ -118,20 +114,29 @@ $range_from = date('m/d/Y', strtotime('-30 day', strtotime($range_to)));
                                             $caquery = $conn->query($casql);
                                             $carow = $caquery->fetch_assoc();
                                             $cashadvance = $carow['cashamount'];
+                                            $esql =
+                                                'SELECT * FROM nOkcCY6dDe.employees';
+                                            $equery = $conn->query($esql);
+                                            $erow = $equery->fetch_assoc();
+                                            $rsql =
+                                                'SELECT * FROM nOkcCY6dDe.position';
+                                            $rquery = $conn->query($rsql);
+                                            $rrow = $rquery->fetch_assoc();
                                             $gross =
-                                                $row['rate'] * $row['total_hr'];
+                                                $rrow['rate'] *
+                                                $row['total_hr'];
                                             $total_deduction =
                                                 $deduction + $cashadvance;
                                             $net = $gross - $total_deduction;
                                             echo "
                         <tr>
                           <td>" .
-                                                $row['lastname'] .
+                                                $erow['firstname'] .
                                                 ', ' .
-                                                $row['firstname'] .
+                                                $erow['lastname'] .
                                                 "</td>
                           <td>" .
-                                                $row['employee_id'] .
+                                                $erow['employee_id'] .
                                                 "</td>
                           <td>" .
                                                 number_format($gross, 2) .
