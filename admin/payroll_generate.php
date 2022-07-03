@@ -35,7 +35,7 @@ function generateRow($from, $to, $conn, $deduction)
             $row['lastname'] .
             '</td>
 				<td>' .
-            $row['empid'] .
+            $row['employee'] .
             '</td>
 				<td align="right">' .
             number_format($net, 2) .
@@ -47,7 +47,7 @@ function generateRow($from, $to, $conn, $deduction)
     $contents .=
         '
 			<tr>
-				<td colspan="2" align="right"><b>Total</b></td>
+				<td colspan="2" align="right"><b>Total Cost that is paid By Company</b></td>
 				<td align="right"><b>' .
         number_format($total, 2) .
         '</b></td>
