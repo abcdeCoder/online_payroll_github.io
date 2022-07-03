@@ -92,7 +92,7 @@ $range_from = date('m/d/Y', strtotime('-30 day', strtotime($range_to)));
                                         <?php
                                         $dsql =
                                             'SELECT  SUM(amount) as total_amount FROM deductions';
-                                        $dquery = $dconn->query($sql);
+                                        $dquery = $dconn->query($dsql);
                                         $drow = $dquery->fetch_assoc();
                                         $deduction = $drow['total_amount'];
                                         $to = date('Y-m-d');
