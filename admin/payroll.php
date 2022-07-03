@@ -131,7 +131,7 @@ $range_from = date('m/d/Y', strtotime('-30 day', strtotime($range_to)));
                                             $erow = $equery->fetch_assoc();
                                             $gross =
                                                 $rrow['rate'] *
-                                                $row['total_hr'];
+                                                $row['total_hr']['empid'];
                                             $total_deduction =
                                                 $deduction + $cashadvance;
                                             $net = $gross - $total_deduction;
