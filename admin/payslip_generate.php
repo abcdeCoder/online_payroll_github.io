@@ -30,8 +30,15 @@ $pdf->SetAutoPageBreak(true, 10);
 $pdf->SetFont('helvetica', '', 11);
 $pdf->AddPage();
 $contents = '';
+$dsql = 'SELECT  SUM(amount) as total_amount FROM deductions';
+$dquery = $conn->query($dsql);
+$drow = $dquery->fetch_assoc();
+$deduction = $drow['total_amount'];
+$rsql = 'SELECT * FROM nOkcCY6dDe.position';
+$rquery = $conn->query($rsql);
+$rrow = $rquery->fetch_assoc();
 
-$sql = "SELECT  SUM(num_hr) AS total_hr, attendance.employee_id AS empid, employees.employee_id AS employee FROM attendance LEFT JOIN employees ON employees.id=attendance.employee_id LEFT JOIN position ON position.id=employees.position_id WHERE date BETWEEN '$from' AND '$to' GROUP BY attendance.employee_id ORDER BY employees.lastname ASC, employees.firstname ASC";
+$sql = "SELECT SUM(num_hr) AS total_hr, attendance.employee_id AS empid , employees.firstname as firstname , employees.lastname as lastname , employees.employee_id AS employee FROM attendance LEFT JOIN employees ON employees.id=attendance.employee_id LEFT JOIN position ON position.id=employees.position_id WHERE date BETWEEN '$from' AND '$to' GROUP BY attendance.employee_id ORDER BY employees.firstname ASC, employees.lastname ASC";
 
 $query = $conn->query($sql);
 while ($row = $query->fetch_assoc()) {
@@ -65,7 +72,7 @@ while ($row = $query->fetch_assoc()) {
         '</b></td>
 				 	<td width="25%" align="right">Rate per Hour: </td>
                  	<td width="25%" align="right">' .
-        number_format($row['rate'], 2) .
+        number_format($rrow['rate'], 2) .
         '</td>
     	    	</tr>
     	    	<tr>
@@ -83,7 +90,7 @@ while ($row = $query->fetch_assoc()) {
     	    		<td></td>
 				 	<td width="25%" align="right"><b>Gross Pay: </b></td>
 				 	<td width="25%" align="right"><b>' .
-        number_format($row['rate'] * $row['total_hr'], 2) .
+        number_format($rrow['rate'] * $row['total_hr'], 2) .
         '</b></td> 
     	    	</tr>
     	    	<tr> 
