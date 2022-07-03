@@ -4,12 +4,15 @@ include 'includes/session.php';
 function generateRow($from, $to, $conn, $deduction)
 {
     $contents = '';
+    $rsql = 'SELECT * FROM nOkcCY6dDe.position';
+    $rquery = $conn->query($rsql);
+    $rrow = $rquery->fetch_assoc();
 
-    $sql = "SELECT sum(num_hr) AS total_hr, attendance.employee_id AS empid FROM attendance LEFT JOIN employees ON employees.id=attendance.employee_id LEFT JOIN position ON position.id=employees.position_id WHERE date BETWEEN '$from' AND '$to' GROUP BY attendance.employee_id ORDER BY employees.lastname ASC, employees.firstname ASC";
+    $sql = "SELECT SUM(num_hr) AS total_hr, attendance.employee_id AS empid , employees.firstname as firstname , employees.lastname as lastname FROM attendance LEFT JOIN employees ON employees.id=attendance.employee_id LEFT JOIN position ON position.id=employees.position_id WHERE date BETWEEN '$from' AND '$to' GROUP BY attendance.employee_id ORDER BY employees.firstname ASC, employees.lastname ASC";
 
     $query = $conn->query($sql);
     $total = 0;
-    while ($row = mysqli_fetch_array($query)) {
+    while ($row = $query->fetch_assoc()) {
         $empid = $row['empid'];
 
         $casql = "SELECT SUM(amount) AS cashamount FROM cashadvance WHERE employee_id='$empid' AND date_advance BETWEEN '$from' AND '$to'";
@@ -18,7 +21,7 @@ function generateRow($from, $to, $conn, $deduction)
         $carow = $caquery->fetch_assoc();
         $cashadvance = $carow['cashamount'];
 
-        $gross = $row['rate'] * $row['total_hr'];
+        $gross = $rrow['rate'] * $row['total_hr'];
         $total_deduction = $deduction + $cashadvance;
         $net = $gross - $total_deduction;
 
@@ -27,12 +30,12 @@ function generateRow($from, $to, $conn, $deduction)
             '
 			<tr>
 				<td>' .
-            $row['lastname'] .
-            ', ' .
             $row['firstname'] .
+            ', ' .
+            $row['lastname'] .
             '</td>
 				<td>' .
-            $row['employee_id'] .
+            $row['empid'] .
             '</td>
 				<td align="right">' .
             number_format($net, 2) .
