@@ -58,10 +58,10 @@ function generateRow($from, $to, $conn, $deduction)
 
 $range = $_POST['date_range'];
 $ex = explode(' - ', $range);
-$from = date('Y-m-d');
-$to = date('Y-m-d');
+$from = date('Y-m-d', strtotime($ex[0]));
+$to = date('Y-m-d', strtotime($ex[1]));
 
-$sql = 'SELECT SUM(amount) as total_amount FROM deductions';
+$sql = 'SELECT *, SUM(amount) as total_amount FROM deductions';
 $query = $conn->query($sql);
 $drow = $query->fetch_assoc();
 $deduction = $drow['total_amount'];
