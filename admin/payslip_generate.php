@@ -50,7 +50,7 @@ while ($row = $query->fetch_assoc()) {
     $carow = $caquery->fetch_assoc();
     $cashadvance = $carow['cashamount'];
 
-    $gross = $row['rate'] * $row['total_hr'];
+    $gross = $rrow['rate'] * $row['total_hr'];
     $total_deduction = $deduction + $cashadvance;
     $net = $gross - $total_deduction;
 
