@@ -1,6 +1,6 @@
 <header class="main-header">
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="https://abcdecoder.github.io/portfolio.github.io/" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>P</b>ROLL</span>
         <!-- logo for regular state and mobile devices -->
@@ -19,25 +19,27 @@
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="<?php echo !empty($user['photo'])
-                  ? '../images/' . $user['photo']
-                  : '../images/profile.jpg'; ?>" class="user-image" alt="User Image">
+                            ? '../images/' . $user['photo']
+                            : '../images/profile.jpg'; ?>" class="user-image" alt="User Image">
                         <span class="hidden-xs"><?php echo $user['firstname'] .
-                  ' ' .
-                  $user['lastname']; ?></span>
+                            ' ' .
+                            $user['lastname']; ?></span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
                             <img src="<?php echo !empty($user['photo'])
-                    ? '../images/' . $user['photo']
-                    : '../images/profile.jpg'; ?>" class="img-circle" alt="User Image">
+                                ? '../images/' . $user['photo']
+                                : '../images/profile.jpg'; ?>" class="img-circle" alt="User Image">
 
                             <p>
-                                <?php echo $user['firstname'] . ' ' . $user['lastname']; ?>
+                                <?php echo $user['firstname'] .
+                                    ' ' .
+                                    $user['lastname']; ?>
                                 <small>Member since <?php echo date(
-                      'M. Y',
-                      strtotime($user['created_on'])
-                  ); ?></small>
+                                    'M. Y',
+                                    strtotime($user['created_on'])
+                                ); ?></small>
                             </p>
                         </li>
                         <li class="user-footer">
