@@ -38,7 +38,7 @@ $rsql = 'SELECT * FROM nOkcCY6dDe.position';
 $rquery = $conn->query($rsql);
 $rrow = $rquery->fetch_assoc();
 
-$sql = "SELECT SUM(num_hr) AS total_hr, attendance.employee_id AS empid , employees.firstname as firstname , employees.lastname as lastname , employees.employee_id AS employee FROM attendance LEFT JOIN employees ON employees.id=attendance.employee_id LEFT JOIN position ON position.id=employees.position_id WHERE date BETWEEN '$from' AND '$to' GROUP BY attendance.employee_id ORDER BY employees.firstname ASC, employees.lastname ASC";
+$sql = "SELECT SUM(num_hr) AS total_hr, attendance.employee_id AS empid , employees.firstname as firstname , employees.lastname as lastname , employees.employee_id AS employee , position.rate AS rate FROM attendance LEFT JOIN employees ON employees.id=attendance.employee_id LEFT JOIN position ON position.id=employees.position_id WHERE date BETWEEN '$from' AND '$to' GROUP BY attendance.employee_id ORDER BY employees.firstname ASC, employees.lastname ASC";
 
 $query = $conn->query($sql);
 while ($row = $query->fetch_assoc()) {
@@ -50,7 +50,7 @@ while ($row = $query->fetch_assoc()) {
     $carow = $caquery->fetch_assoc();
     $cashadvance = $carow['cashamount'];
 
-    $gross = $rrow['rate'] * $row['total_hr'];
+    $gross = $row['rate'] * $row['total_hr'];
     $total_deduction = $deduction + $cashadvance;
     $net = $gross - $total_deduction;
 
@@ -72,7 +72,7 @@ while ($row = $query->fetch_assoc()) {
         '</b></td>
 				 	<td width="25%" align="right">Rate per Hour: </td>
                  	<td width="25%" align="right">' .
-        number_format($rrow['rate'], 2) .
+        number_format($row['rate'], 2) .
         '</td>
     	    	</tr>
     	    	<tr>
@@ -90,7 +90,7 @@ while ($row = $query->fetch_assoc()) {
     	    		<td></td>
 				 	<td width="25%" align="right"><b>Gross Pay: </b></td>
 				 	<td width="25%" align="right"><b>' .
-        number_format($rrow['rate'] * $row['total_hr'], 2) .
+        number_format($row['rate'] * $row['total_hr'], 2) .
         '</b></td> 
     	    	</tr>
     	    	<tr> 

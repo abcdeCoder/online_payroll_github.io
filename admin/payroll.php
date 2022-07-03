@@ -116,7 +116,7 @@ $range_from = date('m/d/Y', strtotime('-30 day', strtotime($range_to)));
                                             'SELECT * FROM nOkcCY6dDe.position';
                                         $rquery = $conn->query($rsql);
                                         $rrow = $rquery->fetch_assoc();
-                                        $sql = "SELECT SUM(num_hr) AS total_hr, attendance.employee_id AS empid , employees.firstname as firstname , employees.lastname as lastname FROM attendance LEFT JOIN employees ON employees.id=attendance.employee_id LEFT JOIN position ON position.id=employees.position_id WHERE date BETWEEN '$from' AND '$to' GROUP BY attendance.employee_id ORDER BY employees.firstname ASC, employees.lastname ASC";
+                                        $sql = "SELECT SUM(num_hr) AS total_hr, attendance.employee_id AS empid , employees.firstname as firstname , employees.lastname as lastname , position.rate AS rate FROM attendance LEFT JOIN employees ON employees.id=attendance.employee_id LEFT JOIN position ON position.id=employees.position_id WHERE date BETWEEN '$from' AND '$to' GROUP BY attendance.employee_id ORDER BY employees.firstname ASC, employees.lastname ASC";
                                         $query = $conn->query($sql);
                                         $total = 0;
                                         while ($row = $query->fetch_assoc()) {
@@ -130,8 +130,7 @@ $range_from = date('m/d/Y', strtotime('-30 day', strtotime($range_to)));
                                             $equery = $conn->query($esql);
                                             $erow = $equery->fetch_assoc();
                                             $gross =
-                                                $rrow['rate'] *
-                                                $row['total_hr'];
+                                                $row['rate'] * $row['total_hr'];
                                             $total_deduction =
                                                 $deduction + $cashadvance;
                                             $net = $gross - $total_deduction;
