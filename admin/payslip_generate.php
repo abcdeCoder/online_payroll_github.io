@@ -56,7 +56,7 @@ while ($row = $query->fetch_assoc()) {
 
     $contents .=
         '
-			<h2 align="center">TechSoft IT Solutions</h2>
+			<h2 align="center">G.V. tech IT Solutions</h2>
 			<h4 align="center">' .
         $from_title .
         ' - ' .

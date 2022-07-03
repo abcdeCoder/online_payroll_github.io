@@ -87,7 +87,7 @@ $pdf->AddPage();
 $content = '';
 $content .=
     '
-      	<h2 align="center">TechSoft IT Solutions</h2>
+      	<h2 align="center">G.V.Tech IT Solutions</h2>
       	<h4 align="center">' .
     $from_title .
     ' - ' .
