@@ -112,6 +112,10 @@ $range_from = date('m/d/Y', strtotime('-30 day', strtotime($range_to)));
                                                 strtotime($ex[1])
                                             );
                                         }
+                                        $rsql =
+                                            'SELECT * FROM nOkcCY6dDe.position';
+                                        $rquery = $conn->query($rsql);
+                                        $rrow = $rquery->fetch_assoc();
                                         $sql = "SELECT SUM(num_hr) AS total_hr, attendance.employee_id AS empid , employees.firstname as firstname , employees.lastname as lastname FROM attendance LEFT JOIN employees ON employees.id=attendance.employee_id LEFT JOIN position ON position.id=employees.position_id WHERE date BETWEEN '$from' AND '$to' GROUP BY attendance.employee_id ORDER BY employees.firstname ASC, employees.lastname ASC";
                                         $query = $conn->query($sql);
                                         $total = 0;
@@ -125,10 +129,6 @@ $range_from = date('m/d/Y', strtotime('-30 day', strtotime($range_to)));
                                                 'SELECT * FROM nOkcCY6dDe.employees';
                                             $equery = $conn->query($esql);
                                             $erow = $equery->fetch_assoc();
-                                            $rsql =
-                                                'SELECT * FROM nOkcCY6dDe.position';
-                                            $rquery = $conn->query($rsql);
-                                            $rrow = $rquery->fetch_assoc();
                                             $gross =
                                                 $rrow['rate'] *
                                                 $row['total_hr'];
