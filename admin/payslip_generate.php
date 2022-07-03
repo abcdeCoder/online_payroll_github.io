@@ -122,7 +122,7 @@ while ($row = $query->fetch_assoc()) {
     	    		<td></td>
 				 	<td width="25%" align="right"><b>Net Pay:</b></td>
 				 	<td width="25%" align="right"><b>' .
-        number_format($net, 2) .
+        number_format($gross - $total_deduction, 2) .
         '</b></td> 
     	    	</tr>
     	    </table>
