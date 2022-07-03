@@ -113,7 +113,7 @@ $range_from = date('m/d/Y', strtotime('-30 day', strtotime($range_to)));
                                         $query = $conn->query($sql);
                                         $total = 0;
                                         while ($row = $query->fetch_assoc()) {
-                                            $empid = $row['employee_id'];
+                                            $empid = $row['empid'];
                                             $casql = "SELECT SUM(amount) AS cashamount FROM cashadvance WHERE employee_id='$empid' AND date_advance BETWEEN '$from' AND '$to'";
                                             $caquery = $conn->query($casql);
                                             $carow = $caquery->fetch_assoc();
