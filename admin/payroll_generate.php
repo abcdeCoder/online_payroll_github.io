@@ -8,7 +8,7 @@ function generateRow($from, $to, $conn, $deduction)
     $rquery = $conn->query($rsql);
     $rrow = $rquery->fetch_assoc();
 
-    $sql = "SELECT SUM(num_hr) AS total_hr, attendance.employee_id AS empid , employees.firstname as firstname , employees.lastname as lastname FROM attendance LEFT JOIN employees ON employees.id=attendance.employee_id LEFT JOIN position ON position.id=employees.position_id WHERE date BETWEEN '$from' AND '$to' GROUP BY attendance.employee_id ORDER BY employees.firstname ASC, employees.lastname ASC";
+    $sql = "SELECT SUM(num_hr) AS total_hr, attendance.employee_id AS empid , employees.firstname as firstname , employees.lastname as lastname , employees.employee_id AS employee FROM attendance LEFT JOIN employees ON employees.id=attendance.employee_id LEFT JOIN position ON position.id=employees.position_id WHERE date BETWEEN '$from' AND '$to' GROUP BY attendance.employee_id ORDER BY employees.firstname ASC, employees.lastname ASC";
 
     $query = $conn->query($sql);
     $total = 0;
