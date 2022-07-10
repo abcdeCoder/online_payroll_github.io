@@ -4,7 +4,7 @@ include 'includes/session.php';
 function generateRow($from, $to, $conn, $deduction)
 {
     $contents = '';
-    $rsql = 'SELECT * FROM nOkcCY6dDe.position';
+    $rsql = 'SELECT * FROM sql6505184.position';
     $rquery = $conn->query($rsql);
     $rrow = $rquery->fetch_assoc();
 

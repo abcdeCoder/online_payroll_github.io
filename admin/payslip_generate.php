@@ -34,7 +34,7 @@ $dsql = 'SELECT  SUM(amount) as total_amount FROM deductions';
 $dquery = $conn->query($dsql);
 $drow = $dquery->fetch_assoc();
 $deduction = $drow['total_amount'];
-$rsql = 'SELECT * FROM nOkcCY6dDe.position';
+$rsql = 'SELECT * FROM sql6505184.position';
 $rquery = $conn->query($rsql);
 $rrow = $rquery->fetch_assoc();
 
