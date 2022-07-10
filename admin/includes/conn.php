@@ -1,5 +1,5 @@
 <?php
-$conn = new mysqli('remotemysql.com', 'nOkcCY6dDe', 'vm4bpSk5rp', 'nOkcCY6dDe');
+$conn = new mysqli('sql6.freesqldatabase.com', 'sql6505184', 'ZYbQD4LtuE', 'sql6505184');
 
 if ($conn->connect_error) {
     die('Connection failed: ' . $conn->connect_error);
