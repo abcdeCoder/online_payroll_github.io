@@ -3,4 +3,4 @@
 # User side ---> https://payrollgaurav.herokuapp.com/
 # Admin side --> http://payrollgaurav.herokuapp.com/admin/
 # admin uername --> Gaurav_verma
-# admin password --> asd123@
+# admin password --> admin
