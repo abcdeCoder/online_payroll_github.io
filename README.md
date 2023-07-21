@@ -4,4 +4,4 @@
 # Admin side --> https://gvproject.ml/online_payroll/admin/
 # admin uername --> Gaurav Verma
 # admin password --> Asd123@
-# I hosted it agin on Virtual machine ( Microsoft Azure)
+# I hosted it agin on Virtual machine (raspberry pi 4 )
